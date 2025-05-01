@@ -3,9 +3,9 @@
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/bun",
+      "use": "@vercel/node",
       "config": {
-        "entrypoint": "api/index.ts"
+        "runtime": "bun"
       }
     }
   ],
