@@ -1,8 +1,8 @@
-import Fastify from "fastify";
+import Fastify, { type FastifyReply, type FastifyRequest } from "fastify";
 
-const fastify = Fastify();
+const app = Fastify();
 
-fastify.get("/*", async (req, res) => {
+app.get("/*", async (req, res) => {
   const host = req.headers.host;
   const path = req.url;
 
@@ -14,10 +14,10 @@ fastify.get("/*", async (req, res) => {
   return res.redirect(`https://silicoflare.site${path}`, 301);
 });
 
-fastify.listen({ port: 3000 }, (err, address) => {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-  console.log(`Redirector running on ${address}`);
-});
+export default async function handler(
+  req: FastifyRequest,
+  reply: FastifyReply
+) {
+  await app.ready();
+  app.server.emit("request", req, reply);
+}
