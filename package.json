@@ -11,10 +11,5 @@
   },
   "dependencies": {
     "fastify": "^5.3.2"
-  },
-  "scripts": {
-    "dev": "bun index.ts",
-    "build": "bun build index.ts --outdir dist --format esm --target bun",
-    "start": "bun run ./dist/index.js"
   }
 }

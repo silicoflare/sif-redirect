@@ -1,4 +1,4 @@
-import Fastify, { type FastifyReply, type FastifyRequest } from "fastify";
+import Fastify from "fastify";
 
 const app = Fastify();
 
@@ -14,10 +14,7 @@ app.get("/*", async (req, res) => {
   return res.redirect(`https://silicoflare.site${path}`, 301);
 });
 
-export default async function handler(
-  req: FastifyRequest,
-  reply: FastifyReply
-) {
+export default async (req: Request, res: Response) => {
   await app.ready();
-  app.server.emit("request", req, reply);
-}
+  app.server.emit("request", req, res);
+};
